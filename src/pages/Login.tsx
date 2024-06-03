@@ -45,6 +45,8 @@ function Login() {
         })
     }
 
+    
+
     const handleDisplayLogin = (
         event: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
@@ -88,7 +90,6 @@ function Login() {
                 }else if (err.code ==='auth/user-not-found'){
                     toast.error("Email não existe");
                 }else{
-                    toast.error("Erro ao fazer login");
                     setIsLoginFormValid(false);
                 }
             });
@@ -175,7 +176,7 @@ function Login() {
                         </div>
                         <div className="flex flex-col text-white py-2">
                             <label>Senha</label>
-                            <input type="password" 
+                            <input type="password" id="senha"
                             className= {`rounded-lg mt-2 p-2 ${
                                 isLoginFormValid 
                                     ?   'bg-orange-400 focus:bg-orange-600' 
@@ -185,6 +186,8 @@ function Login() {
                             value={loginPasswordInput}
                             onChange={(e) => handleInputForm(e,setLoginPasswordInput)}
                             />
+                            
+
                         </div>
                         <div className="flex justify-center text-white py-2 hover:cursor-poiter hover:animate-pulse ">
                             <button 
@@ -207,6 +210,7 @@ function Login() {
                         className="w-full my-5 py-2 bg-orange-500 shadow-lg enable:hover:shadow-orange-500/40 text-white font-semibold rounded-lg disabled:bg-orange-400 disabled:shadow-none enabled:shadow-orange-500/50"
                         >
                             Entrar com google 
+
                         </button>
                     </form>
                 )}
@@ -239,7 +243,7 @@ function Login() {
                             <input 
                             value={signUpPasswordInput}
                             onChange={(e) => handleInputForm(e,setSignUpPasswordInput)}
-                            type="password"
+                            type="password" id="senha"
                             className= {`rounded-lg mt-2 p-2 ${
                                 isSignUpFormValid 
                                     ? 'bg-orange-400 focus:bg-orange-600' 
@@ -247,6 +251,7 @@ function Login() {
                             } focus:bg-orange-300  focus:outline-none focus:placeholder-transparent border-2 border-orange-700`}
                             placeholder="Crie sua senha"
                             />
+                           
                         </div>
                         <div className="flex justify-center text-white py-2 hover:cursor-pointer hover:animate-pulse">
                             <button onClick={(event) => handleDisplayLogin(event)} type="button">
