@@ -43,6 +43,9 @@ function Login() {
         .then((result)=> {
             setUser(result.user);
         })
+        .catch((error)=>{
+            console.log(error);
+        })
     }
 
     
@@ -90,6 +93,7 @@ function Login() {
                 }else if (err.code ==='auth/user-not-found'){
                     toast.error("Email não existe");
                 }else{
+                    toast.error("Erro ao fazer login");
                     setIsLoginFormValid(false);
                 }
             });
