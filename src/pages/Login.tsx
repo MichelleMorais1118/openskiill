@@ -43,9 +43,6 @@ function Login() {
         .then((result)=> {
             setUser(result.user);
         })
-        .catch((error)=>{
-            console.log(error);
-        })
     }
 
     const handleDisplayLogin = (
@@ -151,7 +148,7 @@ function Login() {
             <div className="flex flex-col justify-center">
                 <div className="flex flex-col justify-center itens-center mb-14">
                     <h1 className="text-4xl text-white  text-center font-semibold">
-                        ola🎾
+                        Openskill
                     </h1>
                 </div>
             
