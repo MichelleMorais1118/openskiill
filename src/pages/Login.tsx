@@ -20,7 +20,10 @@ function Login() {
     const [signUpEmailInput, setSignUpEmailInput] = useState("");
     const [signUpPasswordInput, setSignUpPasswordInput] = useState("");
     const [isSignUpFormValid , setIsSignUpFormValid] = useState(true);
+    const [isShow, setIsShow] = useState(false);
     const [ , setUser] = useState<User>({} as User);
+
+    const handlePassword = ()=> setIsShow(!isShow);
 
     const errorAlert = (
         <p className="flex justify-center text-red-300">
@@ -92,9 +95,6 @@ function Login() {
                     toast.error("Senha incorreta");
                 }else if (err.code ==='auth/user-not-found'){
                     toast.error("Email não existe");
-                }else{
-                    toast.error("Erro ao fazer login");
-                    setIsLoginFormValid(false);
                 }
             });
 
@@ -129,7 +129,7 @@ function Login() {
                 }else if (err.code ==='auth/email-already-in-use'){
                     toast.error("Email já cadastrado");
                 }else{
-                    toast.error("Erro os criar usuário");
+                    toast.error("Erro ao criar usuário");
                 }
 
                 setIsLoading(false);
@@ -160,7 +160,7 @@ function Login() {
                 {displayLogin && (
                     <form  
                         onSubmit={handleExecuteLogin}
-                        className="max-w-[400px] w-full mx-auto bg-orange-500 p-8 rounded-lg"
+                        className="max-w-[400px] w-full mx-auto bg-orange-700 p-8 rounded-lg"
                     >
                         <h2 className="text-4xl dark:text-white font-bold text-center">
                             Login
@@ -174,13 +174,13 @@ function Login() {
                                 isLoginFormValid 
                                     ?   'bg-orange-400 focus:bg-orange-600' 
                                     : 'bg-red-700 focus:bg-red-800'
-                            } focus:bg-orange-300  focus:outline-none focus:placeholder-transparent border-2 border-orange-700`}
+                            } focus:bg-orange-300  focus:outline-none focus:placeholder-transparent  border-2 border-orange-700`}
                             placeholder="Digite seu email"
                             />
                         </div>
                         <div className="flex flex-col text-white py-2">
                             <label>Senha</label>
-                            <input type="password" id="senha"
+                            <input type={isShow ? "text": "password"}
                             className= {`rounded-lg mt-2 p-2 ${
                                 isLoginFormValid 
                                     ?   'bg-orange-400 focus:bg-orange-600' 
@@ -188,6 +188,7 @@ function Login() {
                             } focus:bg-orange-300  focus:outline-none focus:placeholder-transparent border-2 border-orange-700`}
                             placeholder="Digite sua senha"
                             value={loginPasswordInput}
+                            onMouseDown={handlePassword}
                             onChange={(e) => handleInputForm(e,setLoginPasswordInput)}
                             />
                             
@@ -204,7 +205,7 @@ function Login() {
                         <button
                             disabled= {isLoading}
                             type="submit" 
-                            className="w-full my-5 py-2 bg-orange-500 shadow-lg enabled:hover:shadow-orange-500/40 text-white font-semibold disabled:bg-orange-400 disable:shadow-none enabled:shadow-orange-500/50"
+                            className="w-full rounded-lg my-5 py-2 bg-orange-100 shadow-lg  enabled:hover:shadow-orange-500/40 text-orange-700 font-semibold disabled:bg-orange-400 disable:shadow-none enabled:shadow-orange-500/50"
                         >
                             {isLoading ? "Carregando...": "Fazer Login"}
                         </button>
@@ -222,7 +223,7 @@ function Login() {
                 {displaySignUp && (
                     <form 
                     onSubmit={handleExecuteSignUp}
-                    className="max-w-[400px] w-full mx-auto bg-orange-500 p-8 px-8 rouded-lg">
+                    className="max-w-[400px] w-full mx-auto bg-orange-700 p-8 px-8 rounded-lg">
                         <h2 className="text-4xl dark:text-white font-bold text-center">
                             Criar conta 
                         </h2>
@@ -247,13 +248,14 @@ function Login() {
                             <input 
                             value={signUpPasswordInput}
                             onChange={(e) => handleInputForm(e,setSignUpPasswordInput)}
-                            type="password" id="senha"
+                            type={isShow ? "text": "password"}
                             className= {`rounded-lg mt-2 p-2 ${
                                 isSignUpFormValid 
                                     ? 'bg-orange-400 focus:bg-orange-600' 
                                     : 'bg-red-700 focus:bg-red-800'
                             } focus:bg-orange-300  focus:outline-none focus:placeholder-transparent border-2 border-orange-700`}
                             placeholder="Crie sua senha"
+                            onMouseDown={handlePassword}
                             />
                            
                         </div>
@@ -266,7 +268,7 @@ function Login() {
                         <button  
                         disabled={isLoading}
                         type="submit"
-                        className="w-full my-5 py-2 bg-orange-500 shadow-lg enable:hover:shadow-orange-500/40 text-white font-semibold rounded-lg disabled:bg-orange-400 disabled:shadow-none enabled:shadow-orange-500/50"
+                        className="w-full my-5 py-2 bg-orange-100 shadow-lg enable:hover:shadow-orange-500/40 text-orange-700 font-semibold rounded-lg disabled:bg-orange-400 disabled:shadow-none enabled:shadow-orange-500/50"
                         >
                             {isLoading ? 'Carregando...':'Criar Conta'}
                         </button>
